@@ -12,5 +12,7 @@ CREATE TABLE customer(
 CREATE TABLE orders(
     id VARCHAR(10) PRIMARY KEY ,
     customerId VARCHAR(10) NOT NULL,
-    customerName VARCHAR(50) NOT NULL
-)
+    customerName VARCHAR(50) NOT NULL,
+    FOREIGN KEY (customerId) REFERENCES customer(id)
+);
+
