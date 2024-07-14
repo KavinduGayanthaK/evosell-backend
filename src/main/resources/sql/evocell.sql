@@ -16,3 +16,9 @@ CREATE TABLE orders(
     FOREIGN KEY (customerId) REFERENCES customer(id)
 );
 
+CREATE TABLE item(
+    itemCode VARCHAR(10) PRIMARY KEY ,
+    name VARCHAR(50) NOT NULL ,
+    quantityOnHand INT(10) NOT NULL ,
+    price DOUBLE(5,2) NOT NULL
+);
