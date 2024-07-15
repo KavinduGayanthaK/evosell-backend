@@ -22,37 +22,41 @@ public class CustomerController extends HttpServlet {
 
     Connection connection;
     CustomerData customerData = new CustomerDataImpl();
+    CustomerDTO customerDTO = new CustomerDTO();
 
     @Override
     public void init() throws ServletException {
         try {
             var driverClass = getServletContext().getInitParameter("driver-class");
             var dbUrl = getServletContext().getInitParameter("dbURL");
-            var dbUserName = getServletContext().getInitParameter("dbPassword");
-            var dbPassword = getServletContext().getInitParameter("dbUserName");
+            var dbUserName = getServletContext().getInitParameter("dbUserName");
+            var dbPassword = getServletContext().getInitParameter("dbPassword");
             Class.forName(driverClass);
             this.connection = DriverManager.getConnection(dbUrl,dbUserName,dbPassword);
         }catch (ClassNotFoundException | SQLException e){
-            e.printStackTrace();;
+            e.printStackTrace();
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if (!req.getContentType().toLowerCase().contains("application/json") || req.getContentType() == null){
+
+        if (!req.getContentType().toLowerCase().contains("application/json") || req.getContentType() == null) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }
 
         Jsonb jsonb = JsonbBuilder.create();
-        CustomerDTO customerDTO = jsonb.fromJson(req.getReader(), CustomerDTO.class);
+        customerDTO = jsonb.fromJson(req.getReader(), CustomerDTO.class);
+        customerDTO.setCustomerId(UtilProcess.generateID());
 
-        try(var writer = resp.getWriter()){
-            customerDTO.setCustomerId(UtilProcess.generateID());
-            boolean saveCustomer = customerData.save(customerDTO,connection);
-            if (saveCustomer){
+        try (var writer = resp.getWriter()) {
+            System.out.println(customerDTO.getCustomerId());
+            boolean saveCustomer = customerData.save(customerDTO, this.connection);
+
+            if (saveCustomer) {
                 resp.setStatus(HttpServletResponse.SC_CREATED);
                 writer.write("Customer saved");
-            }else {
+            } else {
                 resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
             }
         }
