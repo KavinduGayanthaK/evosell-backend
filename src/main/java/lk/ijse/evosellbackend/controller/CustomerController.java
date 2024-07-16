@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(value = "/customer")
 public class CustomerController extends HttpServlet {
@@ -61,5 +63,22 @@ public class CustomerController extends HttpServlet {
             }
         }
 
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String nic = req.getParameter("nic");
+        resp.setContentType("application/json");
+        List<CustomerDTO> customerDTOList;
+        Jsonb jsonb = JsonbBuilder.create();
+        try(var writer = resp.getWriter()){
+            if (nic==null){
+                customerDTOList = customerData.get(this.connection);
+                writer.write(jsonb.toJson(customerDTOList));
+            }else{
+                customerDTO = customerData.getCustomerId(nic,this.connection);
+                writer.write(jsonb.toJson(customerDTO));
+            }
+        }
     }
 }
