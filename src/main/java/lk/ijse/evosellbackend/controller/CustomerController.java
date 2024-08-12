@@ -83,5 +83,45 @@ public class CustomerController extends HttpServlet {
         }
     }
 
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if (!req.getContentType().toLowerCase().contains("application/json") || req.getContentType() == null) {
+            resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
+        }
 
+        Jsonb jsonb = JsonbBuilder.create();
+        customerDTO = jsonb.fromJson(req.getReader(), CustomerDTO.class);
+
+
+        try (var writer = resp.getWriter()) {
+            System.out.println(customerDTO.getCustomerId());
+            boolean updateCustomer = customerData.update(customerDTO, this.connection);
+
+            if (updateCustomer) {
+                resp.setStatus(HttpServletResponse.SC_CREATED);
+                writer.write("Customer Updated");
+            } else {
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+            }
+        }
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        try (var writer = resp.getWriter()) {
+            String id = req.getParameter("id");
+            boolean deleteStudent = customerData.delete(id, this.connection);
+
+            if (deleteStudent) {
+                resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
+                writer.write("Delete Customer");
+                System.out.println("Delete Customer");
+            } else {
+                resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+                resp.getWriter().write("Student delete failed");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

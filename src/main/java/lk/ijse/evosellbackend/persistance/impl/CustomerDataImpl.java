@@ -73,4 +73,34 @@ public class CustomerDataImpl implements CustomerData {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public boolean update(CustomerDTO customerDTO, Connection connection) {
+        String UPDATE_CUSTOMER = "UPDATE customer SET name = ?,address=?,email=?,nic=? WHERE id=?";
+        try {
+            var ps = connection.prepareStatement(UPDATE_CUSTOMER);
+
+            ps.setString(1, customerDTO.getCustomerName());
+            ps.setString(2, customerDTO.getCustomerAddress());
+            ps.setString(3, customerDTO.getCustomerEmail());
+            ps.setString(4, customerDTO.getCustomerNic());
+            ps.setString(5, customerDTO.getCustomerId());
+
+            return ps.executeUpdate() != 0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public boolean delete(String id, Connection connection) {
+        String DELETE_CUSTOMER = "DELETE FROM customer WHERE id = ?";
+        try {
+            var ps = connection.prepareStatement(DELETE_CUSTOMER);
+            ps.setString(1,id);
+            return ps.executeUpdate()!=0;
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
 }

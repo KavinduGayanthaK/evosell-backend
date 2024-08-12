@@ -12,4 +12,8 @@ public interface CustomerData {
 
     CustomerDTO getCustomerId(String nic, Connection connection);
 
+    boolean update(CustomerDTO customerDTO, Connection connection);
+
+    boolean delete(String id ,Connection connection);
+
 }
