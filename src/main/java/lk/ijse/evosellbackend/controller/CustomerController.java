@@ -12,6 +12,9 @@ import lk.ijse.evosellbackend.persistance.CustomerData;
 import lk.ijse.evosellbackend.persistance.impl.CustomerDataImpl;
 import lk.ijse.evosellbackend.util.UtilProcess;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -28,14 +31,12 @@ public class CustomerController extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        try {
-            var driverClass = getServletContext().getInitParameter("driver-class");
-            var dbUrl = getServletContext().getInitParameter("dbURL");
-            var dbUserName = getServletContext().getInitParameter("dbUserName");
-            var dbPassword = getServletContext().getInitParameter("dbPassword");
-            Class.forName(driverClass);
-            this.connection = DriverManager.getConnection(dbUrl,dbUserName,dbPassword);
-        }catch (ClassNotFoundException | SQLException e){
+        try{
+            var cdx = new InitialContext();
+            DataSource pool = (DataSource) cdx.lookup("java:comp/env/jdbc/studentRegistration");//methana gana resourse eka onama ekak wenna puluwan eka api narrow cast krnawa dta source ekak wdiyata
+            this.connection = pool.getConnection();
+
+        }catch (NamingException | SQLException e){
             e.printStackTrace();
         }
     }
@@ -49,7 +50,7 @@ public class CustomerController extends HttpServlet {
 
         Jsonb jsonb = JsonbBuilder.create();
         customerDTO = jsonb.fromJson(req.getReader(), CustomerDTO.class);
-        customerDTO.setCustomerId(UtilProcess.generateID());
+
 
         try (var writer = resp.getWriter()) {
             System.out.println(customerDTO.getCustomerId());
@@ -81,4 +82,6 @@ public class CustomerController extends HttpServlet {
             }
         }
     }
+
+
 }
