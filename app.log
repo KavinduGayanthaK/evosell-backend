@@ -1,0 +1,58 @@
+10:47:48.980 [RMI TCP Connection(2)-127.0.0.1] INFO  l.i.e.controller.CustomerController -- Initialization customerController with call init  method
+10:56:30.305 [RMI TCP Connection(2)-127.0.0.1] INFO  l.i.e.controller.CustomerController -- Initialization customerController with call init  method
+10:58:45.516 [RMI TCP Connection(5)-127.0.0.1] INFO  l.i.e.controller.CustomerController -- Initialization customerController with call init  method
+10:58:56.586 [http-nio-8080-exec-8] INFO  l.i.e.controller.CustomerController -- Customer Saved
+12:05:00.081 [RMI TCP Connection(2)-127.0.0.1] INFO  l.i.e.controller.CustomerController -- Initialization customerController with call init  method
+13:43:31.584 [RMI TCP Connection(2)-127.0.0.1] INFO  l.i.e.controller.CustomerController -- Initialization customerController with call init  method
+13:43:50.539 [http-nio-8080-exec-9] INFO  l.i.e.controller.CustomerController -- Customer Saved
+13:59:16.393 [RMI TCP Connection(2)-127.0.0.1] INFO  l.i.e.controller.CustomerController -- Initialization customerController with call init  method
+11:41:02.192 [RMI TCP Connection(2)-127.0.0.1] INFO  l.i.e.controller.CustomerController -- Initialization customerController with call init  method
+20:39:25.666 [RMI TCP Connection(2)-127.0.0.1] INFO  l.i.e.controller.CustomerController -- Initialization customerController with call init  method
+20:42:49.995 [http-nio-8080-exec-4] INFO  l.i.e.controller.OrderController -- Initialization orderController with call init  method
+20:42:50.099 [http-nio-8080-exec-3] ERROR l.i.e.persistance.impl.OrderDataImpl -- Order SavedFailed: Parameter index out of range (4 > number of parameters, which is 3).
+20:42:50.100 [http-nio-8080-exec-3] INFO  l.i.e.controller.OrderController -- Order Save Failed
+20:46:18.461 [RMI TCP Connection(5)-127.0.0.1] INFO  l.i.e.controller.CustomerController -- Initialization customerController with call init  method
+20:46:44.240 [http-nio-8080-exec-10] INFO  l.i.e.controller.OrderController -- Initialization orderController with call init  method
+20:46:44.967 [http-nio-8080-exec-5] ERROR l.i.e.persistance.impl.OrderDataImpl -- Order SavedFailed: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order VALUES('10001',null,'200117802990','Kavindu Gayantha')' at line 1
+20:46:44.968 [http-nio-8080-exec-5] INFO  l.i.e.controller.OrderController -- Order Save Failed
+20:49:03.082 [http-nio-8080-exec-15] ERROR l.i.e.persistance.impl.OrderDataImpl -- Order SavedFailed: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order VALUES('10001',null,'200117802990','Kavindu Gayantha')' at line 1
+20:49:03.082 [http-nio-8080-exec-15] INFO  l.i.e.controller.OrderController -- Order Save Failed
+20:50:10.247 [http-nio-8080-exec-17] ERROR l.i.e.persistance.impl.OrderDataImpl -- Order SavedFailed: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order VALUES('10001',null,'200117802990','Kavindu Gayantha')' at line 1
+20:50:10.247 [http-nio-8080-exec-17] INFO  l.i.e.controller.OrderController -- Order Save Failed
+20:50:57.247 [http-nio-8080-exec-17] ERROR l.i.e.persistance.impl.OrderDataImpl -- Order SavedFailed: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order VALUES('10001',null,'200117802990','Kavindu Gayantha')' at line 1
+20:50:57.247 [http-nio-8080-exec-17] INFO  l.i.e.controller.OrderController -- Order Save Failed
+20:52:53.422 [http-nio-8080-exec-15] ERROR l.i.e.persistance.impl.OrderDataImpl -- Order SavedFailed: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order VALUES('10001',null,'200117802990','Kavindu Gayantha')' at line 1
+20:52:53.422 [http-nio-8080-exec-15] INFO  l.i.e.controller.OrderController -- Order Save Failed
+20:55:12.330 [http-nio-8080-exec-18] ERROR l.i.e.persistance.impl.OrderDataImpl -- Order SavedFailed: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order VALUES('10001',null,'200117802990','Kavindu Gayantha')' at line 1
+20:55:12.330 [http-nio-8080-exec-18] INFO  l.i.e.controller.OrderController -- Order Save Failed
+20:56:32.737 [http-nio-8080-exec-19] ERROR l.i.e.persistance.impl.OrderDataImpl -- Order SavedFailed: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order VALUES('10001',null,'200117802990','Kavindu Gayantha')' at line 1
+20:56:32.737 [http-nio-8080-exec-19] INFO  l.i.e.controller.OrderController -- Order Save Failed
+20:57:16.255 [http-nio-8080-exec-18] ERROR l.i.e.persistance.impl.OrderDataImpl -- Order SavedFailed: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order VALUES('10001',null,'200117802990','Kavindu Gayantha')' at line 1
+20:57:16.255 [http-nio-8080-exec-18] INFO  l.i.e.controller.OrderController -- Order Save Failed
+20:59:47.837 [http-nio-8080-exec-17] ERROR l.i.e.persistance.impl.OrderDataImpl -- Order SavedFailed: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order VALUES('10001',null,'200117802990','Kavindu Gayantha')' at line 1
+20:59:47.837 [http-nio-8080-exec-17] INFO  l.i.e.controller.OrderController -- Order Save Failed
+21:00:13.903 [http-nio-8080-exec-19] ERROR l.i.e.persistance.impl.OrderDataImpl -- Order SavedFailed: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order VALUES('10001',null,'200117802990','Kavindu Gayantha')' at line 1
+21:00:13.903 [http-nio-8080-exec-19] INFO  l.i.e.controller.OrderController -- Order Save Failed
+21:04:47.363 [http-nio-8080-exec-15] ERROR l.i.e.persistance.impl.OrderDataImpl -- Order SavedFailed: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'order VALUES('10001','C00-113','200117802990','Kavindu Gayantha')' at line 1
+21:04:47.364 [http-nio-8080-exec-15] INFO  l.i.e.controller.OrderController -- Order Save Failed
+21:05:58.157 [RMI TCP Connection(8)-127.0.0.1] INFO  l.i.e.controller.CustomerController -- Initialization customerController with call init  method
+21:06:28.607 [http-nio-8080-exec-17] INFO  l.i.e.controller.OrderController -- Initialization orderController with call init  method
+21:06:28.905 [http-nio-8080-exec-15] INFO  l.i.e.controller.OrderController -- Order Saved
+21:06:28.945 [http-nio-8080-exec-15] INFO  l.i.e.controller.OrderController -- Order Details Saved
+21:22:31.661 [http-nio-8080-exec-22] ERROR l.i.e.persistance.impl.OrderDataImpl -- Order SavedFailed: Duplicate entry '10001' for key 'orders.PRIMARY'
+21:22:31.661 [http-nio-8080-exec-22] INFO  l.i.e.controller.OrderController -- Order Save Failed
+21:22:31.662 [http-nio-8080-exec-23] ERROR l.i.e.persistance.impl.OrderDataImpl -- Order SavedFailed: Duplicate entry '10001' for key 'orders.PRIMARY'
+21:22:31.662 [http-nio-8080-exec-23] INFO  l.i.e.controller.OrderController -- Order Save Failed
+22:24:11.259 [RMI TCP Connection(2)-127.0.0.1] INFO  l.i.e.controller.CustomerController -- Initialization customerController with call init  method
+13:42:58.856 [RMI TCP Connection(2)-127.0.0.1] INFO  l.i.e.controller.CustomerController -- Initialization customerController with call init  method
+13:44:24.952 [http-nio-8080-exec-1] INFO  l.i.e.controller.OrderController -- Initialization orderController with call init  method
+13:46:59.903 [RMI TCP Connection(5)-127.0.0.1] INFO  l.i.e.controller.CustomerController -- Initialization customerController with call init  method
+13:47:07.462 [http-nio-8080-exec-1] INFO  l.i.e.controller.OrderController -- Initialization orderController with call init  method
+13:51:45.131 [RMI TCP Connection(2)-127.0.0.1] INFO  l.i.e.controller.CustomerController -- Initialization customerController with call init  method
+13:51:52.382 [http-nio-8080-exec-2] INFO  l.i.e.controller.OrderController -- Initialization orderController with call init  method
+14:00:04.528 [http-nio-8080-exec-3] ERROR l.i.e.persistance.impl.OrderDataImpl -- Order SavedFailed: Duplicate entry '10001' for key 'orders.PRIMARY'
+14:00:04.528 [http-nio-8080-exec-3] INFO  l.i.e.controller.OrderController -- Order Save Failed
+14:02:27.939 [RMI TCP Connection(6)-127.0.0.1] INFO  l.i.e.controller.CustomerController -- Initialization customerController with call init  method
+14:02:36.640 [http-nio-8080-exec-5] INFO  l.i.e.controller.OrderController -- Initialization orderController with call init  method
+14:04:35.957 [RMI TCP Connection(9)-127.0.0.1] INFO  l.i.e.controller.CustomerController -- Initialization customerController with call init  method
+14:04:39.130 [http-nio-8080-exec-17] INFO  l.i.e.controller.OrderController -- Initialization orderController with call init  method
