@@ -11,6 +11,8 @@ import lk.ijse.evosellbackend.dto.CustomerDTO;
 import lk.ijse.evosellbackend.persistance.CustomerData;
 import lk.ijse.evosellbackend.persistance.impl.CustomerDataImpl;
 import lk.ijse.evosellbackend.util.UtilProcess;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -24,20 +26,21 @@ import java.util.List;
 
 @WebServlet(value = "/customer")
 public class CustomerController extends HttpServlet {
-
+    static Logger logger = LoggerFactory.getLogger(CustomerController.class);
     Connection connection;
     CustomerData customerData = new CustomerDataImpl();
     CustomerDTO customerDTO = new CustomerDTO();
 
     @Override
     public void init() throws ServletException {
+        logger.info("Initialization customerController with call init  method");
         try{
             var cdx = new InitialContext();
             DataSource pool = (DataSource) cdx.lookup("java:comp/env/jdbc/studentRegistration");//methana gana resourse eka onama ekak wenna puluwan eka api narrow cast krnawa dta source ekak wdiyata
             this.connection = pool.getConnection();
 
-        }catch (NamingException | SQLException e){
-            e.printStackTrace();
+        }catch (NamingException | SQLException e) {
+            logger.error("init failed with: " + e.getMessage());
         }
     }
 
@@ -53,31 +56,35 @@ public class CustomerController extends HttpServlet {
 
 
         try (var writer = resp.getWriter()) {
-            System.out.println(customerDTO.getCustomerId());
             boolean saveCustomer = customerData.save(customerDTO, this.connection);
 
             if (saveCustomer) {
                 resp.setStatus(HttpServletResponse.SC_CREATED);
                 writer.write("Customer saved");
+                logger.info("Customer Saved");
             } else {
                 resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+
             }
         }
-
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String nic = req.getParameter("nic");
-        resp.setContentType("application/json");
-        List<CustomerDTO> customerDTOList;
-        Jsonb jsonb = JsonbBuilder.create();
+        System.out.println(nic);
+
+        List<CustomerDTO> customerDTOList = new ArrayList<>();
+
         try(var writer = resp.getWriter()){
+            resp.setContentType("application/json");
+            Jsonb jsonb = JsonbBuilder.create();
             if (nic==null){
                 customerDTOList = customerData.get(this.connection);
                 writer.write(jsonb.toJson(customerDTOList));
             }else{
                 customerDTO = customerData.getCustomerId(nic,this.connection);
+                System.out.println("sdsd");
                 writer.write(jsonb.toJson(customerDTO));
             }
         }
@@ -92,13 +99,11 @@ public class CustomerController extends HttpServlet {
         Jsonb jsonb = JsonbBuilder.create();
         customerDTO = jsonb.fromJson(req.getReader(), CustomerDTO.class);
 
-
         try (var writer = resp.getWriter()) {
-            System.out.println(customerDTO.getCustomerId());
             boolean updateCustomer = customerData.update(customerDTO, this.connection);
 
             if (updateCustomer) {
-                resp.setStatus(HttpServletResponse.SC_CREATED);
+                resp.setStatus(HttpServletResponse.SC_NO_CONTENT);
                 writer.write("Customer Updated");
             } else {
                 resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);
