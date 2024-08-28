@@ -13,7 +13,30 @@ import java.util.ArrayList;
 import java.util.List;
 import lk.ijse.evosellbackend.dto.ItemDTO;
 import lk.ijse.evosellbackend.persistance.ItemData;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ItemDataImpl implements ItemData {
+    public ItemDataImpl() {
+    }
+
+    static Logger logger = LoggerFactory.getLogger(ItemDataImpl.class);
+
+    public boolean save(ItemDTO itemDTO, Connection connection) {
+        String ITEM_SAVE = "INSERT INTO item VALUES(?,?,?,?)";
+
+        try {
+            PreparedStatement ps = connection.prepareStatement(ITEM_SAVE);
+            ps.setString(1, itemDTO.getItemCode());
+            ps.setString(2, itemDTO.getItemName());
+            ps.setString(3, itemDTO.getQty());
+            ps.setString(4, itemDTO.getPrice());
+            return ps.executeUpdate() != 0;
+        } catch (SQLException e) {
+            logger.error("Item save failed : " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
+
 
 }
