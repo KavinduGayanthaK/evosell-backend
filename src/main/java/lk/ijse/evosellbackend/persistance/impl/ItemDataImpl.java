@@ -55,6 +55,16 @@ public class ItemDataImpl implements ItemData {
         }
     }
 
-
+    @Override
+    public boolean delete(String id, Connection connection) {
+        String DELETE_ITEM = "DELETE FROM item WHERE itemCode = ?";
+        try {
+            var ps = connection.prepareStatement(DELETE_ITEM);
+            ps.setString(1,id);
+            return ps.executeUpdate()!=0;
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
 
 }

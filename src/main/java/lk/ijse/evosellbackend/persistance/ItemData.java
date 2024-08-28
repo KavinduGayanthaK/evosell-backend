@@ -9,4 +9,6 @@ public interface ItemData {
     boolean save(ItemDTO itemDTO, Connection connection);
 
     boolean update(ItemDTO itemDTO, Connection connection);
+
+    boolean delete(String id, Connection connection);
 }
