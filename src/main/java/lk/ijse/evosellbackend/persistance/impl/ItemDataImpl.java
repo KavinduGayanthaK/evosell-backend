@@ -38,5 +38,23 @@ public class ItemDataImpl implements ItemData {
         }
     }
 
+    @Override
+    public boolean update(ItemDTO itemDTO, Connection connection) {
+        String ITEM_UPDATE = "UPDATE item SET name = ?, quantityOnHand = ?, price = ? WHERE itemCode =?";
+        try {
+            var ps = connection.prepareStatement(ITEM_UPDATE);
+
+            ps.setString(1,itemDTO.getItemName());
+            ps.setString(2,itemDTO.getQty());
+            ps.setString(3,itemDTO.getPrice());
+            ps.setString(4,itemDTO.getItemCode());
+
+            return ps.executeUpdate()!=0;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
 
 }

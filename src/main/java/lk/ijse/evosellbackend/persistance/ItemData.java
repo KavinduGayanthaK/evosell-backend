@@ -7,4 +7,6 @@ import java.sql.Connection;
 
 public interface ItemData {
     boolean save(ItemDTO itemDTO, Connection connection);
+
+    boolean update(ItemDTO itemDTO, Connection connection);
 }
