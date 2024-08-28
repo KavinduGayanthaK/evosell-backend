@@ -51,6 +51,7 @@ public class ItemDataImpl implements ItemData {
 
             return ps.executeUpdate()!=0;
         } catch (SQLException e) {
+            logger.error("Item update failed : " + e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -63,6 +64,7 @@ public class ItemDataImpl implements ItemData {
             ps.setString(1,id);
             return ps.executeUpdate()!=0;
         }catch (SQLException e){
+            logger.error("Item delete failed : " + e.getMessage());
             throw new RuntimeException(e);
         }
     }
@@ -84,6 +86,7 @@ public class ItemDataImpl implements ItemData {
             }
             return itemDTOList;
         } catch (SQLException e) {
+            logger.error("Item get failed : " + e.getMessage());
             throw new RuntimeException(e);
         }
     }
