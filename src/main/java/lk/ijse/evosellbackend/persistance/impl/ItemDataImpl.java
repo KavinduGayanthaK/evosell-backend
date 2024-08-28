@@ -67,4 +67,47 @@ public class ItemDataImpl implements ItemData {
         }
     }
 
+    @Override
+    public List<ItemDTO> getAll(Connection connection) {
+        String GET_ITEM = "SELECT * FROM item";
+        List<ItemDTO> itemDTOList = new ArrayList<>();
+        try {
+            var ps = connection.prepareStatement(GET_ITEM);
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()){
+                itemDTOList.add(new ItemDTO(
+                        resultSet.getString(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4)
+                ));
+            }
+            return itemDTOList;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public ItemDTO getItemCode(String itemCode, Connection connection) {
+        String GET_ITEM = "SELECT * FROM item WHERE itemCode =?";
+        try{
+            var ps = connection.prepareStatement(GET_ITEM);
+            ps.setString(1,itemCode);
+            ResultSet resultSet = ps.executeQuery();
+            ItemDTO itemDTO = new ItemDTO();
+            while (resultSet.next()){
+                itemDTO.setItemCode(resultSet.getString(1));
+                itemDTO.setItemName(resultSet.getString(2));
+                itemDTO.setQty(resultSet.getString(3));
+                itemDTO.setPrice(resultSet.getString(4));
+            }
+            return itemDTO;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+
+
 }

@@ -19,6 +19,8 @@ import javax.sql.DataSource;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @WebServlet(urlPatterns = "/item")
 public class ItemController extends HttpServlet {
@@ -103,6 +105,24 @@ public class ItemController extends HttpServlet {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String itemCode = req.getParameter("itemCode");
+        List<ItemDTO> itemDTOList = new ArrayList<>();
+        try(var writer = resp.getWriter()){
+            resp.setContentType("application/json");
+            Jsonb jsonb = JsonbBuilder.create();
+            if (itemCode == null){
+
+                itemDTOList = itemData.getAll(this.connection);
+                writer.write(jsonb.toJson(itemDTOList));
+            }else {
+                itemDTO = itemData.getItemCode(itemCode,this.connection);
+            }
         }
 
     }
