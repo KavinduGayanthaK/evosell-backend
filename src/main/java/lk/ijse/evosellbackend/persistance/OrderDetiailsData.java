@@ -9,4 +9,5 @@ public interface OrderDetiailsData {
     boolean save(OrderDetailsDTO orderDetailsDTO, Connection connection);
 
 
+    List<OrderDetailsDTO> getAll(Connection connection);
 }

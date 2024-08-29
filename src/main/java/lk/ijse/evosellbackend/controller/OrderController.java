@@ -78,5 +78,41 @@ public class OrderController extends HttpServlet {
         }
     }
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        List<OrderDTO> orderDTOList;
+        List<OrderDetailsDTO> orderDetailsDTOList;
+        List<OrderDetailsDTO> combinedDTOS = new ArrayList<>();
 
+        try(var writer = resp.getWriter()){
+            resp.setContentType("application/json");
+            Jsonb jsonb = JsonbBuilder.create();
+
+            orderDTOList = orderData.getAllOrder(this.connection);
+            orderDetailsDTOList = orderDetiailsData.getAll(this.connection);
+
+            for(OrderDTO orderDTO :orderDTOList) {
+                for(OrderDetailsDTO orderDetailsDTO1 : orderDetailsDTOList){
+                    if (orderDTO.getOrderId().equals(orderDetailsDTO1.getOrderId())){
+                        OrderDetailsDTO combinedDetailsDTO = new OrderDetailsDTO(
+                                orderDTO.getOrderId(),
+                                orderDTO.getCustomerId(),
+                                orderDTO.getCustomerNic(),
+                                orderDTO.getCustomerName(),
+                                orderDetailsDTO1.getItemCode(),
+                                orderDetailsDTO1.getItemName(),
+                                orderDetailsDTO1.getItemQty(),
+                                orderDetailsDTO1.getTotal(),
+                                orderDetailsDTO1.getDiscount(),
+                                orderDetailsDTO1.getNetTotal(),
+                                orderDetailsDTO1.getDate()
+                        );
+                        combinedDTOS.add(combinedDetailsDTO);
+                    }
+                }
+            }
+            System.out.println(combinedDTOS);
+            writer.write(jsonb.toJson(combinedDTOS));
+        }
+    }
 }

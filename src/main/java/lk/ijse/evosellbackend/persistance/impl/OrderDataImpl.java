@@ -29,7 +29,27 @@ public class OrderDataImpl implements OrderData {
         }
     }
 
-
+    @Override
+    public List<OrderDTO> getAllOrder(Connection connection) {
+        String GET_ALL_ORDER = "SELECT * FROM orders";
+        List<OrderDTO> orderDTOList = new ArrayList<>();
+        try{
+            var ps = connection.prepareStatement(GET_ALL_ORDER);
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                orderDTOList.add(new OrderDTO(
+                        resultSet.getString(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4)
+                ));
+            }
+            return orderDTOList;
+        } catch (SQLException e) {
+            logger.error("Order Get Failed : " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
 }
 
 

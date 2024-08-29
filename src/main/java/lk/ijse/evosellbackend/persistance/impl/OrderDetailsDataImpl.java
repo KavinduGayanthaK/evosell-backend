@@ -33,5 +33,30 @@ public class OrderDetailsDataImpl implements OrderDetiailsData {
         }
     }
 
-
+    @Override
+    public List<OrderDetailsDTO> getAll(Connection connection) {
+        String GET_ALL_ORDER_DETAILS = "SELECT * FROM orderDetails";
+        List<OrderDetailsDTO> orderDetailsDTOS =  new ArrayList<>();
+        try{
+            var ps = connection.prepareStatement(GET_ALL_ORDER_DETAILS);
+            ResultSet resultSet = ps.executeQuery();
+            while (resultSet.next()) {
+                orderDetailsDTOS.add(
+                        new  OrderDetailsDTO(
+                                resultSet.getString(1),
+                                resultSet.getString(2),
+                                resultSet.getString(3),
+                                resultSet.getString(4),
+                                resultSet.getString(5),
+                                resultSet.getString(6),
+                                resultSet.getString(7),
+                                resultSet.getString(8)
+                        ));
+            };
+            return orderDetailsDTOS;
+        } catch (SQLException e) {
+            logger.error("Get Order Details Failed : " +e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
 }
